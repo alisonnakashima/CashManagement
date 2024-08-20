@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Cash Mangement</string>
+    <string name="btLancar">Lançar</string>
+    <string name="btVerLancamentos">Ver Lançamentos</string>
+    <string name="btSaldo">Saldo</string>
+    <string name="tvDataLanc">Data Lanc.:</string>
+    <string name="tvValor">Valor:</string>
+    <string name="tvDetalhe">Detalhe:</string>
+    <string name="tvTipo">Tipo:</string>
 </resources>

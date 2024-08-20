@@ -37,7 +37,7 @@
             android:id="@+id/tvType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tipo: "
+            android:text="@string/tvTipo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
@@ -64,7 +64,7 @@
             android:id="@+id/tvDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Detalhe: "
+            android:text="@string/tvDetalhe"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
 
@@ -91,14 +91,14 @@
             android:id="@+id/tvValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Valor: "
+            android:text="@string/tvValor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layourt_marginLeft="16dp"
+            android:layout_marginLeft="16dp"
             app:layout_constraintStart_toEndOf="@+id/tvValue" />
     </LinearLayout>
 
@@ -119,7 +119,7 @@
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data Lanc.: "
+            android:text="@string/tvDataLanc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
@@ -127,8 +127,8 @@
             android:id="@+id/etDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layourt_marginLeft="16dp"
-            app:layout_constraintStart_toEndOf="@+id/tvValue" />
+            android:layout_marginLeft="16dp"
+            app:layout_constraintStart_toEndOf="@+id/tvDate" />
     </LinearLayout>
 
     <Button
@@ -137,9 +137,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/linearLayout4"
         android:layout_marginTop="16dp"
-        android:layoutmarginLeft="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="Lançar" />
+        android:text="@string/btLancar" />
 
     <Button
         android:id="@+id/btEntryList"
@@ -147,9 +147,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/btInsert"
         android:layout_marginTop="16dp"
-        android:layoutmarginLeft="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="Ver Lançamentos" />
+        android:text="@string/btVerLancamentos" />
 
     <Button
         android:id="@+id/btBalance"
@@ -157,9 +157,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/btEntryList"
         android:layout_marginTop="16dp"
-        android:layoutmarginLeft="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="Saldo" />
+        android:text="@string/btSaldo" />
 
     <TextView
         android:id="@+id/tvBalanceResult"
