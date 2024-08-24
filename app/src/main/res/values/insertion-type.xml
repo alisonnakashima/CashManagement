@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "InsertionType" >
+        <item> Débito</item>
+        <item> Crédito </item>
+    </string-array>
+
+    <string-array name = "DetailsDebit" >
+        <item> Alimentação </item>
+        <item> Transporte </item>
+        <item> Saúde </item>
+        <item> Moradia </item>
+    </string-array>
+
+    <string-array name = "DetailsCredit" >
+        <item> Salário </item>
+        <item> Extras </item>
+    </string-array>
+
+</resources>

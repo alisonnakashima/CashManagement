@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:text="Cash Management"
         android:textAlignment="center"
@@ -37,14 +37,19 @@
             android:id="@+id/tvType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tvTipo"
+            android:text="@string/tvTypeText"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
         <Spinner
             android:id="@+id/spType"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:entries="@array/InsertionType"
+            android:hint="@string/spTypeText"
+            android:spinnerMode="dropdown"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 
 
@@ -62,16 +67,21 @@
 
         <TextView
             android:id="@+id/tvDetail"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tvDetalhe"
+            android:text="@string/tvDetailText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
 
         <Spinner
             android:id="@+id/spDetail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:entries="@array/DetailsDebit"
+            android:hint="@string/spDetailText"
+            android:spinnerMode="dropdown"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 
 
@@ -89,17 +99,23 @@
 
         <TextView
             android:id="@+id/tvValue"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tvValor"
+            android:text="@string/tvValorText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <EditText
+            android:id="@+id/etValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintStart_toEndOf="@+id/tvValue" />
+            android:layout_marginStart="16dp"
+            android:hint="@string/textValueInsertion"
+            android:inputType="numberDecimal"
+            app:layout_constraintStart_toEndOf="@+id/tvValue"
+            tools:ignore="TouchTargetSizeCheck" />
+
     </LinearLayout>
 
 
@@ -117,9 +133,10 @@
 
         <TextView
             android:id="@+id/tvDate"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tvDataLanc"
+            android:text="@string/tvDataLancText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
@@ -127,8 +144,15 @@
             android:id="@+id/etDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintStart_toEndOf="@+id/tvDate" />
+            android:layout_marginStart="16dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="@string/textDateInsertion"
+            android:inputType="date"
+            app:layout_constraintStart_toEndOf="@+id/tvDate"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 
     <Button
@@ -137,9 +161,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/linearLayout4"
         android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="@string/btLancar" />
+        android:text="@string/btLancarText" />
 
     <Button
         android:id="@+id/btEntryList"
@@ -147,9 +170,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/btInsert"
         android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="@string/btVerLancamentos" />
+        android:text="@string/btVerLancamentosText" />
 
     <Button
         android:id="@+id/btBalance"
@@ -159,18 +181,17 @@
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="@string/btSaldo" />
+        android:text="@string/btSaldoText" />
 
     <TextView
         android:id="@+id/tvBalanceResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/btBalance"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:textSize="28dp"
+        android:textSize="28sp"
         />
 
 

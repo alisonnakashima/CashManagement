@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">Cash Mangement</string>
-    <string name="btLancar">Lançar</string>
-    <string name="btVerLancamentos">Ver Lançamentos</string>
-    <string name="btSaldo">Saldo</string>
-    <string name="tvDataLanc">Data Lanc.:</string>
-    <string name="tvValor">Valor:</string>
-    <string name="tvDetalhe">Detalhe:</string>
-    <string name="tvTipo">Tipo:</string>
+    <string name="btLancarText">Lançar</string>
+    <string name="btVerLancamentosText">Ver Lançamentos</string>
+    <string name="btSaldoText">Saldo</string>
+    <string name="tvDataLancText">Data Lanc.:</string>
+    <string name="tvValorText">Valor:</string>
+    <string name="tvDetailText">Detalhe:</string>
+    <string name="tvTypeText">Tipo:</string>
+    <string name="textValueInsertion">Valor do lançamento</string>
+    <string name="textDateInsertion">Data do lançamento</string>
+    <string name="spTypeText">Tipo de lançamento </string>
+    <string name="spDetailText">Detalhes do lançamento </string>
+    <string name="ToastSucessText">Inserção realizada.</string>
+    <string name="ValueError">Campo vazio ou zerado.</string>
+    <string name="DateError">Selecionar data.</string>
 </resources>
