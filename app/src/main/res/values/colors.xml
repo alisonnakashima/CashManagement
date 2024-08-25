@@ -4,5 +4,17 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#fffc00</color>
     <color name="darkBlue">#1d2130</color>
+    <color name="darkBlue2">#3B4360</color>
+
+    <color name="green">#047A33</color>
+    <color name="purple">#FF6200EE</color>
+    <color name="blue">#FF3700B3</color>
+    <color name="red">#E16666</color>
+    <color name="teal">#1FB3B2</color>
+
+    <color name="green_light">#FFA5D6A7</color>
+    <color name="purple_light">#996BDA</color>
+    <color name="red_light">#CD7676</color>
+    <color name="blue_light">#FF81D4FA</color>
 
 </resources>

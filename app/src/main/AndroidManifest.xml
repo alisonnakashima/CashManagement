@@ -13,12 +13,18 @@
         android:theme="@style/Theme.CashMangement"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity2teste"
+            android:exported="false" />
+        <activity
+            android:name=".InsertionsList"
+            android:exported="false" />
+        <activity
             android:name=".ShowInsertions"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.SplashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

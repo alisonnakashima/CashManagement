@@ -62,8 +62,8 @@ class MainActivity : AppCompatActivity() {
             null
         )
 
+//        banco.execSQL("CREATE TABLE IF NOT EXISTS insertions (_id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, date TEXT, description TEXT, value TEXT)")
 
-        banco.execSQL("CREATE TABLE IF NOT EXISTS insertions (_id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, date TEXT, description TEXT, value TEXT)")
 
     }
 
@@ -146,12 +146,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun btEntryListOnClick() {
+        
         System.out.println("Ver listas")
     }
 
     private fun btBalanceOnClick() {
         System.out.println("Ver Saldo")
     }
+
 
     override fun onPause() {
         super.onPause()

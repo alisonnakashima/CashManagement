@@ -25,11 +25,11 @@ class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NA
         private const val DATABASE_NAME = "db-insertions.sqlite"
         private const val TABLE_NAME = "insertions"
         private const val DATABABASE_VERSION = 1
-        private const val ID = 0
-        private const val TYPE = 1
-        private const val DATE = 2
-        private const val DESCRIPTION = 3
-        private const val VALUE = 4
+        public const val ID = 0
+        public const val TYPE = 1
+        public const val DATE = 2
+        public const val DESCRIPTION = 3
+        public const val VALUE = 4
 
     }
 
@@ -54,5 +54,19 @@ class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NA
 
     }
 
+    fun cursorList() : Cursor {
+        val db = this.writableDatabase
+
+        val registro = db.query(
+            TABLE_NAME,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+        return registro
+    }
 
 }
