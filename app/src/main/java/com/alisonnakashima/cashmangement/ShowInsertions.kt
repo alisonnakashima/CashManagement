@@ -18,15 +18,13 @@ class ShowInsertions : AppCompatActivity() {
         binding = ActivityShowInsertionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        banco = DatabaseHandler(this)
         lvInsertions = findViewById(R.id.lvInsertions)
 
         val registros = banco.cursorList()
-
-
         val adapter = ListAdapter(this, registros)
 
         lvInsertions.adapter = adapter
-
 
     }
 }

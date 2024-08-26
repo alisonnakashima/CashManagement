@@ -12,9 +12,9 @@
     <color name="red">#E16666</color>
     <color name="teal">#1FB3B2</color>
 
-    <color name="green_light">#FFA5D6A7</color>
+    <color name="green_light">#FF87C889</color>
     <color name="purple_light">#996BDA</color>
-    <color name="red_light">#CD7676</color>
+    <color name="red_light">#FFBC9292</color>
     <color name="blue_light">#FF81D4FA</color>
 
 </resources>

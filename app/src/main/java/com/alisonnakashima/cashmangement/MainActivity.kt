@@ -1,69 +1,78 @@
 package com.alisonnakashima.cashmangement
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.ContentValues
+import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
+import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
-import android.text.Editable
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.alisonnakashima.cashmangement.Adapter.ListAdapter
 import com.alisonnakashima.cashmangement.database.DatabaseHandler
 import com.alisonnakashima.cashmangement.databinding.ActivityMainBinding
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.Calendar
 import java.util.Date
-import com.alisonnakashima.cashmangement.entity.Insertions
-import java.util.Locale
+import com.alisonnakashima.cashmangement.entity.Inserter
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var banco: SQLiteDatabase
+    private lateinit var db: SQLiteDatabase
 
     private lateinit var spType: Spinner
     private lateinit var spDetail: Spinner
 
+    private lateinit var tvBalanceResult: TextView
+
     private lateinit var etDateSelected: EditText
     private val calendar = Calendar.getInstance()
 
-    private lateinit var db: DatabaseHandler
+    private lateinit var banco: DatabaseHandler
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         Thread.sleep(5000)
 
+        val detailsCredit = resources.getStringArray(R.array.DetailsCredit)
+        val detailsDebit = resources.getStringArray(R.array.DetailsDebit)
+
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        db = DatabaseHandler(this)
+        banco = DatabaseHandler(this)
         etDateSelected = binding.etDate
+
 
         //Por padrão está setando o dia atual do dispositivo, caso altere a data/hora manualmente, será alterado o dia exibido
         var getDate = getCurrentDate()
-        System.out.println(getDate)
         etDateSelected.setText(getDate)
 
         setButtonListener()
 
-        banco = SQLiteDatabase.openOrCreateDatabase(
+        db = SQLiteDatabase.openOrCreateDatabase(
             this.getDatabasePath("db-insertions.sqlite"),
             null
         )
 
-//        banco.execSQL("CREATE TABLE IF NOT EXISTS insertions (_id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, date TEXT, description TEXT, value TEXT)")
 
+        //Alterar componentes do campo spDetails de acordo com o que está selecionado em spType
+        if( binding.spType.selectedItem.toString() == "Crédito" ){
+
+        }
+        else {
+//            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, detailsDebit)
+//            binding.spDetail.adapter = adapter
+        }
 
     }
 
@@ -138,7 +147,7 @@ class MainActivity : AppCompatActivity() {
             aux3 = (aux3 * 0.01)
             System.out.println(aux3)
 
-            db.insert(Insertions(0, binding.spType.selectedItem.toString(), binding.etDate.text.toString(), binding.spDetail.selectedItem.toString(), aux3.toString() ) )
+            banco.insert(Inserter(0, binding.spType.selectedItem.toString(), binding.etDate.text.toString(), binding.spDetail.selectedItem.toString(), aux3.toString() ) )
 
             System.out.println(registro.toString())
             Toast.makeText(this, getString(R.string.ToastSucessText), Toast.LENGTH_LONG).show()
@@ -146,14 +155,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun btEntryListOnClick() {
-        
+        val intent = Intent (this, ShowInsertions::class.java )
         System.out.println("Ver listas")
+        startActivity( intent )
     }
 
     private fun btBalanceOnClick() {
+
+        banco = DatabaseHandler(this)
+
+        val registros = banco.cursorList()
+        val balance = banco.balance().toString()
+
+        if ( balance.toDouble() > 0 ) {
+            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FF87C889") )
+        }
+        else if (balance.toDouble() < 0 ) {
+            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FFBC9292") )
+        }
+        else {
+            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+        }
+
+        binding.tvBalanceResult.setText("R$ " + balance)
         System.out.println("Ver Saldo")
     }
-
 
     override fun onPause() {
         super.onPause()

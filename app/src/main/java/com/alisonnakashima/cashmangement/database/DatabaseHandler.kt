@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.database.Cursor
 
 
-import com.alisonnakashima.cashmangement.entity.Insertions
+import com.alisonnakashima.cashmangement.entity.Inserter
 
 
 class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NAME, null, DATABABASE_VERSION ){
@@ -24,7 +24,7 @@ class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NA
     companion object {
         private const val DATABASE_NAME = "db-insertions.sqlite"
         private const val TABLE_NAME = "insertions"
-        private const val DATABABASE_VERSION = 1
+        private const val DATABABASE_VERSION = 2
         public const val ID = 0
         public const val TYPE = 1
         public const val DATE = 2
@@ -33,14 +33,14 @@ class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NA
 
     }
 
-    fun insert(insertions: Insertions){
+    fun insert(inserter: Inserter){
         val db = this.writableDatabase
 
         val registro = ContentValues()
-        registro.put("type", insertions.type)
-        registro.put("date", insertions.date)
-        registro.put("description", insertions.description)
-        registro.put("value", insertions.value)
+        registro.put("type", inserter.type)
+        registro.put("date", inserter.date)
+        registro.put("description", inserter.description)
+        registro.put("value", inserter.value)
 
         db.insert(TABLE_NAME, null, registro)
 
@@ -50,7 +50,30 @@ class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NA
 
     }
 
-    fun balance(){
+    fun balance(): Double {
+        val db = this.writableDatabase
+        var saldo : Double = 0.0;
+
+        val registro = db.query(
+            TABLE_NAME,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+
+        while ( registro.moveToNext() ){
+            if (registro.getString(TYPE) == "Débito" ) {
+                saldo += registro.getString(VALUE).toDouble() * (-1)
+            }
+            else
+                saldo += registro.getString(VALUE).toDouble()
+        }
+
+        System.out.println(saldo)
+        return saldo
 
     }
 
