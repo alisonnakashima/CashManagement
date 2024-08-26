@@ -7,8 +7,12 @@ import android.database.sqlite.SQLiteDatabase
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -29,25 +33,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var spType: Spinner
     private lateinit var spDetail: Spinner
 
-    private lateinit var tvBalanceResult: TextView
-
     private lateinit var etDateSelected: EditText
     private val calendar = Calendar.getInstance()
 
     private lateinit var banco: DatabaseHandler
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         Thread.sleep(5000)
 
-        val detailsCredit = resources.getStringArray(R.array.DetailsCredit)
-        val detailsDebit = resources.getStringArray(R.array.DetailsDebit)
-
-
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         banco = DatabaseHandler(this)
         etDateSelected = binding.etDate
@@ -61,19 +59,42 @@ class MainActivity : AppCompatActivity() {
 
         db = SQLiteDatabase.openOrCreateDatabase(
             this.getDatabasePath("db-insertions.sqlite"),
-            null
-        )
+            null )
 
 
         //Alterar componentes do campo spDetails de acordo com o que está selecionado em spType
-        if( binding.spType.selectedItem.toString() == "Crédito" ){
+        spDetail = findViewById(R.id.spDetail)
+        spType = findViewById(R.id.spType)
 
-        }
-        else {
-//            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, detailsDebit)
-//            binding.spDetail.adapter = adapter
-        }
+        val detailsCredit= resources.getStringArray(R.array.DetailsCredit).toList()
+        val detailsDebit = resources.getStringArray(R.array.DetailsDebit).toList()
+        var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, detailsCredit)
 
+
+        spType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                p0: AdapterView<*>?,
+                p1: View?,
+                p2: Int,
+                p3: Long)
+                {
+
+                    if( binding.spType.selectedItem.toString() == "Crédito" ){
+                        System.out.println(binding.spType.selectedItem.toString())
+                        adapter = ArrayAdapter<String>(baseContext, android.R.layout.simple_list_item_1, detailsCredit)
+                        spDetail.setAdapter(adapter)
+                    }
+                    else {
+                        adapter = ArrayAdapter(baseContext, android.R.layout.simple_list_item_1, detailsDebit)
+                        spDetail.setAdapter (adapter)
+                    }
+
+                }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
     }
 
     private fun setDate(){
@@ -112,6 +133,7 @@ class MainActivity : AppCompatActivity() {
         binding.etDate.setOnClickListener{
             setDate()
         }
+
     }
 
     private fun getCurrentDate():String{
@@ -140,16 +162,16 @@ class MainActivity : AppCompatActivity() {
 
             //Função para arredondar valor inserido para 2 casas decimais
             //REMOVER CASO ENCONTRE A FUNÇÃO QUE LIMITE JÁ NA INSERÇÃO DO VALOR
-            var aux = binding.etValue.text.toString().toDouble()
-            aux = (aux * 100)
-            var aux2 = aux.toInt()
-            var aux3 = aux2.toDouble()
-            aux3 = (aux3 * 0.01)
-            System.out.println(aux3)
+            var aux = round2DecimalPlaces(binding.etValue.text.toString().toDouble())
+//            aux = (aux * 100)
+//            var aux2 = aux.toInt()
+//            var aux3 = aux2.toDouble()
+//            aux3 = (aux3 * 0.01)
+            System.out.println(aux)
 
-            banco.insert(Inserter(0, binding.spType.selectedItem.toString(), binding.etDate.text.toString(), binding.spDetail.selectedItem.toString(), aux3.toString() ) )
+            banco.insert(Inserter(0, binding.spType.selectedItem.toString(), binding.etDate.text.toString(), binding.spDetail.selectedItem.toString(), aux.toString() ) )
 
-            System.out.println(registro.toString())
+            System.out.println( binding.spType.selectedItem.toString() +" "+ binding.etDate.text.toString() +" "+ binding.spDetail.selectedItem.toString() +" R$"+ aux.toString() )
             Toast.makeText(this, getString(R.string.ToastSucessText), Toast.LENGTH_LONG).show()
         }
     }
@@ -164,21 +186,58 @@ class MainActivity : AppCompatActivity() {
 
         banco = DatabaseHandler(this)
 
-        val registros = banco.cursorList()
-        val balance = banco.balance().toString()
+        val balance = round2DecimalPlaces(banco.balance()).toString()
 
         if ( balance.toDouble() > 0 ) {
-            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FF87C889") )
-        }
-        else if (balance.toDouble() < 0 ) {
-            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FFBC9292") )
-        }
-        else {
-            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+//            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FF87C889") )
+            var toast = Toast.makeText(this, "R$ " + balance, Toast.LENGTH_LONG)
+            var view = toast.getView()
+            if (view != null) {
+                view.setBackgroundColor(Color.parseColor("#FF87C889"))
+            }
+            view = view as ViewGroup
+            val aux = view.getChildAt(0) as TextView
+            aux.setTextSize(26F)
+            toast.show()
         }
 
-        binding.tvBalanceResult.setText("R$ " + balance)
+        else if (balance.toDouble() < 0 ) {
+//            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FFBC9292") )
+            var toast = Toast.makeText(this, "R$ " + balance, Toast.LENGTH_LONG)
+            var view = toast.getView()
+            if (view != null) {
+                view.setBackgroundColor(Color.parseColor("#FFBC9292"))
+            }
+            view = view as ViewGroup
+            val aux = view.getChildAt(0) as TextView
+            aux.setTextSize(26F)
+            toast.show()
+        }
+
+        else {
+//            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            var toast = Toast.makeText(this, "R$ " + balance, Toast.LENGTH_LONG)
+            var view = toast.getView()
+            if (view != null) {
+                view.setBackgroundColor(Color.parseColor("#FFFC00"))
+            }
+            view = view as ViewGroup
+            val aux = view.getChildAt(0) as TextView
+            aux.setTextSize(26F)
+            toast.show()
+        }
+
         System.out.println("Ver Saldo")
+    }
+
+    fun round2DecimalPlaces ( x: Double) : Double {
+        //Função para arredondar valor inserido para 2 casas decimais
+        //REMOVER CASO ENCONTRE A FUNÇÃO QUE LIMITE JÁ NA INSERÇÃO DO VALOR
+        var aux = (x * 100)
+        var aux2 = aux.toInt()
+        var aux3 = aux2.toDouble()
+        aux3 = (aux3 * 0.01)
+        return aux3
     }
 
     override fun onPause() {

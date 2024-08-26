@@ -10,6 +10,7 @@ import android.database.Cursor
 import com.alisonnakashima.cashmangement.entity.Inserter
 
 
+
 class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NAME, null, DATABABASE_VERSION ){
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (_id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, date DATE, description TEXT, value TEXT)")
@@ -72,7 +73,7 @@ class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NA
                 saldo += registro.getString(VALUE).toDouble()
         }
 
-        System.out.println(saldo)
+        System.out.println(saldo.toString() + " No Round on db")
         return saldo
 
     }
