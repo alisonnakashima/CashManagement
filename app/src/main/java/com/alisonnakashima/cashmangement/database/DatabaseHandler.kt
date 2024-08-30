@@ -25,7 +25,7 @@ class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NA
     companion object {
         private const val DATABASE_NAME = "db-insertions.sqlite"
         private const val TABLE_NAME = "insertions"
-        private const val DATABABASE_VERSION = 2
+        private const val DATABABASE_VERSION = 3
         public const val ID = 0
         public const val TYPE = 1
         public const val DATE = 2
@@ -44,10 +44,6 @@ class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NA
         registro.put("value", inserter.value)
 
         db.insert(TABLE_NAME, null, registro)
-
-    }
-
-    fun entryList(){
 
     }
 
@@ -73,7 +69,7 @@ class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NA
                 saldo += registro.getString(VALUE).toDouble()
         }
 
-        System.out.println(saldo.toString() + " No Round on db")
+//        System.out.println(saldo.toString() + " No Round on db")
         return saldo
 
     }
@@ -91,6 +87,35 @@ class DatabaseHandler (context: Context): SQLiteOpenHelper (context, DATABASE_NA
             null
         )
         return registro
+    }
+
+    fun graphData() : List<String>{
+        val db = this.writableDatabase
+        var saldoDebito : Double = 0.0;
+        var saldoCredito : Double = 0.0;
+
+        val registro = db.query(
+            TABLE_NAME,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+
+        while ( registro.moveToNext() ){
+            if (registro.getString(TYPE) == "Débito" ) {
+                saldoDebito += registro.getString(VALUE).toDouble()
+            }
+            else
+                saldoCredito += registro.getString(VALUE).toDouble()
+        }
+
+//        System.out.println("Saldo Crédito: R$" + saldoCredito.toString() + ", saldo Débito: R$" + saldoDebito.toString())
+        var aux = listOf(saldoCredito.toString(), saldoDebito.toString())
+        return (aux)
+
     }
 
 }

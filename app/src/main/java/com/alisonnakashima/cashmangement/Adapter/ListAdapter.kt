@@ -70,7 +70,7 @@ class ListAdapter(val context: Context, val cursor: Cursor): BaseAdapter() {
 
         tvInsertionShow.setText(aux)
         tvInsertionShow.setTextColor(Color.parseColor("#FF000000") )
-        System.out.println(aux)
+//        System.out.println(aux)
         return v
     }
 
