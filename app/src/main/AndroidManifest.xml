@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CashMangement"
         tools:targetApi="31">
         <activity
+            android:name=".GraphScreen"
+            android:exported="false" />
+        <activity
             android:name=".ShowInsertions"
             android:exported="false" />
         <activity

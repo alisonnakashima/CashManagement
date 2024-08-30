@@ -163,22 +163,18 @@ class MainActivity : AppCompatActivity() {
             //Função para arredondar valor inserido para 2 casas decimais
             //REMOVER CASO ENCONTRE A FUNÇÃO QUE LIMITE JÁ NA INSERÇÃO DO VALOR
             var aux = round2DecimalPlaces(binding.etValue.text.toString().toDouble())
-//            aux = (aux * 100)
-//            var aux2 = aux.toInt()
-//            var aux3 = aux2.toDouble()
-//            aux3 = (aux3 * 0.01)
-            System.out.println(aux)
+//            System.out.println(aux)
 
             banco.insert(Inserter(0, binding.spType.selectedItem.toString(), binding.etDate.text.toString(), binding.spDetail.selectedItem.toString(), aux.toString() ) )
 
-            System.out.println( binding.spType.selectedItem.toString() +" "+ binding.etDate.text.toString() +" "+ binding.spDetail.selectedItem.toString() +" R$"+ aux.toString() )
+//            System.out.println( binding.spType.selectedItem.toString() +" "+ binding.etDate.text.toString() +" "+ binding.spDetail.selectedItem.toString() +" R$"+ aux.toString() )
             Toast.makeText(this, getString(R.string.ToastSucessText), Toast.LENGTH_LONG).show()
         }
     }
 
     private fun btEntryListOnClick() {
         val intent = Intent (this, ShowInsertions::class.java )
-        System.out.println("Ver listas")
+//        System.out.println("Ver listas")
         startActivity( intent )
     }
 
@@ -189,7 +185,6 @@ class MainActivity : AppCompatActivity() {
         val balance = round2DecimalPlaces(banco.balance()).toString()
 
         if ( balance.toDouble() > 0 ) {
-//            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FF87C889") )
             var toast = Toast.makeText(this, "R$ " + balance, Toast.LENGTH_LONG)
             var view = toast.getView()
             if (view != null) {
@@ -202,7 +197,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         else if (balance.toDouble() < 0 ) {
-//            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FFBC9292") )
             var toast = Toast.makeText(this, "R$ " + balance, Toast.LENGTH_LONG)
             var view = toast.getView()
             if (view != null) {
@@ -215,7 +209,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         else {
-//            binding.tvBalanceResult.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
             var toast = Toast.makeText(this, "R$ " + balance, Toast.LENGTH_LONG)
             var view = toast.getView()
             if (view != null) {
@@ -227,7 +220,7 @@ class MainActivity : AppCompatActivity() {
             toast.show()
         }
 
-        System.out.println("Ver Saldo")
+//        System.out.println("Ver Saldo")
     }
 
     fun round2DecimalPlaces ( x: Double) : Double {
