@@ -48,14 +48,21 @@ class GraphScreen : AppCompatActivity() {
 
         barChart.axisRight.setDrawLabels(false)
         barChart.xAxis.setEnabled(false)
+<<<<<<< HEAD
         barChart.axisLeft.setEnabled(true)
+=======
+        barChart.axisLeft.setEnabled(false)
+>>>>>>> origin/master
         barChart.axisRight.setEnabled(false)
         barChart.axisLeft.setDrawLabels(false)
         barChart.setDrawGridBackground(false)
         barChart.xAxis.setDrawLabels(false)
+<<<<<<< HEAD
         barChart.axisLeft.setDrawZeroLine(true)
 
 
+=======
+>>>>>>> origin/master
         round = MainActivity()
 
         val colors = ArrayList<Int>()
@@ -64,6 +71,7 @@ class GraphScreen : AppCompatActivity() {
 
         var values = banco.graphData()
 
+<<<<<<< HEAD
         val aux1= round.round2DecimalPlaces(values[0].toDouble())
         val aux2 =round.round2DecimalPlaces(values[1].toDouble())
 
@@ -73,6 +81,16 @@ class GraphScreen : AppCompatActivity() {
         barDataSet = BarDataSet(barEntriesList, "Crédito")
 
         barEntriesList2.add(BarEntry(2f, aux2.toFloat()))
+=======
+        val aux1= round.round2DecimalPlaces(values[0].toDouble()).toFloat()
+        val aux2 =round.round2DecimalPlaces(values[1].toDouble()).toFloat()
+
+        barEntriesList.add(BarEntry(1f, aux1))
+        barDataSet = BarDataSet(barEntriesList, "Crédito")
+
+
+        barEntriesList2.add(BarEntry(2f, aux2))
+>>>>>>> origin/master
         barDataSet2 = BarDataSet(barEntriesList2, "Débito")
 
         barData = BarData(barDataSet,barDataSet2)
@@ -88,7 +106,10 @@ class GraphScreen : AppCompatActivity() {
         barChart.setScaleEnabled(false)
         barChart.description.isEnabled = false
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
         legend = barChart.getLegend()
         legend.setTextSize(16f)
 
